@@ -9,7 +9,18 @@ on:
 env:
   CARGO_TERM_COLOR: always
 
+permissions:
+  contents: read
+
 jobs:
+  workflow-security:
+    name: Validate workflow permissions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check workflow permissions
+        run: ./scripts/check_workflows.sh
+
   contracts:
     runs-on: ubuntu-latest
     steps:
